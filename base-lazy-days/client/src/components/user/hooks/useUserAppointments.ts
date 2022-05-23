@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { useQuery } from 'react-query';
 
 import type { Appointment, User } from '../../../../../shared/types';
@@ -21,7 +20,7 @@ export function useUserAppointments(): Appointment[] {
 
   const fallback = [];
   const { data: userAppointments = fallback } = useQuery(
-    'user-appointments',
+    [queryKeys.appointments, queryKeys.user, user?.id],
     () => getUserAppointments(user),
     { enabled: !!user },
   );
